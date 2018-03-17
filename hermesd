@@ -1,0 +1,43 @@
+#!/bin/bash
+
+HERMES=/usr/bin/hermes
+
+[ -f $HERMES ] || exit 0
+
+start() {
+        if [ ! -f /config/hermes.ini ]
+        then
+            cp /etc/xen/hermes.ini /config/hermes.ini
+        fi
+        echo -n "Starting hermes: "
+        $HERMES --daemon
+        echo "OK"
+}
+
+stop() {
+        echo -n "Stopping hermes: "
+        $HERMES --stop
+        echo "OK"
+}
+
+restart() {
+        stop
+        start
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart|reload)
+        restart
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+
+exit $?

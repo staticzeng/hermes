@@ -1,0 +1,6 @@
+1. rsync: add rsync port interface, default 873
+2. test case: add --ip interface, by which we send http request to remote node by it.
+3. torrent: add remove torrent, pause torrent , resume torrent
+4. add cancel task
+5. tracker will loaded while downloading, and won't be written to
+   torrent-file.
